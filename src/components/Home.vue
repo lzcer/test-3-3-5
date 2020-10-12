@@ -3,11 +3,15 @@
     <div class="container">
       <div class="title">文章管理</div>
       <ul class="tab">
-        <li class="active">文章列表</li>
-        <li>文章编写</li>
+        <li @click="goTab('list')" :class="{ active: active === 'list' }">
+          文章列表
+        </li>
+        <li @click="goTab('edit')" :class="{ active: active === 'edit' }">
+          文章编写
+        </li>
         <li>文章分类</li>
       </ul>
-      <router-view></router-view>
+      <router-view @editTab="editTab" :data="data"></router-view>
       <ul class="footer">
         <li>
           <div class="icon"></div>
@@ -25,6 +29,75 @@
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      active: 'list',
+      data: [
+        {
+          id: 1,
+          author: '测试1',
+          title: '标题1',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 2,
+          author: '测试2',
+          title: '标题2',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 3,
+          author: '测试3',
+          title: '标题3',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 4,
+          author: '测试4',
+          title: '标题4',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 5,
+          author: '测试5',
+          title: '标题5',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 6,
+          author: '测试6',
+          title: '标题6',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        },
+        {
+          id: 7,
+          author: '测试7',
+          title: '标题7',
+          content: '内容内容内容内容内容内容内容内容内容内容内容',
+          time: '2019-05-01:17:05:02'
+        }
+      ]
+    }
+  },
+  methods: {
+    goTab(tab) {
+      this.active = tab
+      this.$router.push('/' + tab)
+    },
+    editTab() {
+      this.active = 'edit'
+    }
+  }
+}
+</script>
 <style scoped>
 ul {
   list-style: none;

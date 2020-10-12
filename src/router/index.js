@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
-import Manager from '@/components/Manager'
+import List from '@/components/List'
 import Edit from '@/components/Edit'
 
 Vue.use(Router)
@@ -12,12 +12,12 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
-      redirect: '/manager',
+      redirect: '/list',
       children: [
         {
-          path: '/manager',
-          name: 'manager',
-          component: Manager
+          path: '/list',
+          name: 'list',
+          component: List
         },
         {
           path: '/edit',
@@ -28,3 +28,8 @@ export default new Router({
     }
   ]
 })
+// 解决ElementUI导航栏中的vue-router在3.0版本以上重复点菜单报错问题
+const originalPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+}

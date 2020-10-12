@@ -7,19 +7,39 @@
       </div>
     </div>
     <div class="content">
-      <ul id="list" class="list"></ul>
+      <ul id="list" class="list">
+        <li @click="edit(item.id)" v-for="(item, index) in data" :key="index">
+          <b>{{ item.title }}</b>
+          <div>{{ item.author }}发布于:{{ item.time }}</div>
+          <div class="icon"></div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
 <script>
 export default {
+  props: ['data'],
   data() {
     return {}
   },
-  methods: {}
+  methods: {
+    edit(id) {
+      this.$emit('editTab')
+      this.$router.push({ path: '/edit', query: { id: id } })
+    }
+  }
 }
 </script>
 <style scoped>
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+* {
+  text-align: start;
+}
 .searchBox {
   width: 100%;
   position: fixed;

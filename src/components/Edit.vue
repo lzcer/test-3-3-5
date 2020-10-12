@@ -3,20 +3,40 @@
     <div class="content">
       <div class="author">
         <span>作者:</span>
-        <input id="author" type="text" />
+        <input v-model="item.author" id="author" type="text" />
       </div>
       <div class="title_">
         <span>标题:</span>
-        <input id="title_" type="text" />
+        <input v-model="item.title" id="title_" type="text" />
       </div>
       <div class="content_">
         <span>内容:</span>
-        <textarea name="" id="content_" cols="30" rows="10"></textarea>
+        <textarea v-model="item.content" name="" id="content_" cols="30" rows="10"></textarea>
       </div>
     </div>
   </div>
 </template>
+<script>
+export default {
+  props: ['data'],
+  data() {
+    return {
+      item: {}
+    }
+  },
+  mounted() {
+    let id = Number(this.$route.query.id)
+    this.item = this.data.filter(item => {
+      console.log(item.id, id)
+      return item.id === id
+    })[0]
+  }
+}
+</script>
 <style scoped>
+* {
+  text-align: start;
+}
 .content {
   margin-top: 80px;
   margin-bottom: 60px;
